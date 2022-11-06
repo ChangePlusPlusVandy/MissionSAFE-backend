@@ -1,0 +1,19 @@
+{
+  "name": "missionsafe-backend",
+  "version": "1.0.0",
+  "description": "server for MissionSAFE solution",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChangePlusPlusVandy/MissionSAFE-backend.git"
+  },
+  "author": "alexbawa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChangePlusPlusVandy/MissionSAFE-backend/issues"
+  },
+  "homepage": "https://github.com/ChangePlusPlusVandy/MissionSAFE-backend#readme"
+}
