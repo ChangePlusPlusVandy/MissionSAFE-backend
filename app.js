@@ -1,4 +1,4 @@
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const express = require("express");
 const { router } = require("./routers/root.router");
 
@@ -15,11 +15,11 @@ app.use((req, res, next) => {
     next();
 });
     
-/*app.models = {
+app.models = {
     Form: require("./models/Form"),
     Staff: require("./models/Staff"),
     Youth: require("./models/Youth"),
-}*/
+}
 
 app.use("/api", router);
 
