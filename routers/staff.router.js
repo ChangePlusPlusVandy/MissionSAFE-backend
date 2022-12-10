@@ -1,9 +1,11 @@
 const express = require("express");
-const {defaultFunc} = require("../controllers/staff.controller");
+const { staffExample } = require("../controllers/staff.controller");
 
 const staffRouter = express.Router();
 staffRouter.use(express.json());
 
-staffRouter.get("/", defaultFunc)
+staffRouter.get("/", staffExample)
 
-module.exports = {staffRouter};
+module.exports = {
+    staffRouter
+};

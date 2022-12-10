@@ -1,7 +1,7 @@
-function defaultFunc() {
-    console.log("Called /users/youth/");
+const youthExample = (req, res) => {
+    res.status(200).send("Hi from /users/youth/")
 }
 
 module.exports = { 
-    defaultFunc
+    youthExample
 }
