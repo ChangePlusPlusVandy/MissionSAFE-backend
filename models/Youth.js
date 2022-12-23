@@ -10,4 +10,7 @@ let Youth = new Schema({
     active: { type: Boolean, default: false },
 })
 
-module.exports = mongoose.models.Youth || mongoose.model("Youth", Youth);
+module.exports = {
+    model: mongoose.models.Youth || mongoose.model("Youth", Youth),
+    schema: Youth,
+}

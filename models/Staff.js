@@ -11,4 +11,7 @@ let Staff = new Schema({
     counselor: { type: Boolean, default: false},
 })
 
-module.exports = mongoose.models.Staff || mongoose.model("Staff", Staff);
+module.exports = {
+    model: mongoose.models.Staff || mongoose.model("Staff", Staff),
+    schema: Staff,
+};
