@@ -5,4 +5,7 @@ let Form = new Schema({
     date: {type: Date},
 })
 
-module.exports = mongoose.models.Form || mongoose.model("Form", Form);
+module.exports = {
+    model: mongoose.models.Form || mongoose.model("Form", Form),
+    schema: Form,
+}
