@@ -5,7 +5,6 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const MONGODB = process.env.MONGODB || "mongodb+srv://alexbawa:Lv!.9Tjvf6Zhxc3@cluster0.mfrbcpa.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -28,6 +27,6 @@ app.use("/api", router);
 
 app.listen(PORT, () => {
     mongoose.set('strictQuery', false);
-    mongoose.connect(MONGODB);
+    mongoose.connect(process.env.MONGODB);
     console.log(`Server starting @ PORT ${PORT}`);
 })
