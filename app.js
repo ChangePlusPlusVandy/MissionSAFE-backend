@@ -30,6 +30,3 @@ app.listen(PORT, () => {
     mongoose.connect(process.env.MONGODB);
     console.log(`Server starting @ PORT ${PORT}`);
 });
-
-app.get("/", (_req, res) => {
-})

@@ -2,26 +2,12 @@ const staffExample = (req, res) => {
     res.status(200).send("Hi from /users/staff/")
 }
 
-// TODO: pass in fire ID, boolean to set user's active property to false
-const deactivateStaff = async (fireID) => {
+const updateActiveStaff = async (fireID, update) => {
     try {
         const staff = await Staff.findOne({fireID: fireID});
     if(!staff) throw new Error("Staff not found");
 
-    staff.active = false;
-    await staff.save();
-    } catch (err) {
-        throw err;
-    }
-}
-
-// TODO: pass in fire ID, boolean to set user's active property to true
-const activateStaff = async (fireID) => {
-    try {
-        const staff = await Staff.findOne({fireID: fireID});
-    if(!staff) throw new Error("Staff not found");
-
-    staff.active = true;
+    staff.active = update;
     await staff.save();
     } catch (err) {
         throw err;
@@ -29,5 +15,5 @@ const activateStaff = async (fireID) => {
 }
 
 module.exports = { 
-    staffExample, deactivateStaff, activateStaff
+    staffExample, updateActiveStaff,
 }
