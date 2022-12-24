@@ -1,10 +1,8 @@
 const express = require("express");
-const { staffExample, updateActiveStaff } = require("../controllers/staff.controller");
+const { updateActiveStaff } = require("../controllers/staff.controller");
 
 const staffRouter = express.Router();
 staffRouter.use(express.json());
-
-staffRouter.get("/", staffExample)
 
 staffRouter.put('/:fireID/deactivate', async (req, res) => {
     try {
