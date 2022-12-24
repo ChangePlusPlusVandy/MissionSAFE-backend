@@ -29,4 +29,7 @@ app.listen(PORT, () => {
     mongoose.set('strictQuery', false);
     mongoose.connect(process.env.MONGODB);
     console.log(`Server starting @ PORT ${PORT}`);
+});
+
+app.get("/", (_req, res) => {
 })
