@@ -1,24 +1,46 @@
 const express = require("express");
-const { staffExample, updateActiveStaff } = require("../controllers/staff.controller");
+const { getAllStaff, getStaffByID, updateStaff } = require("../controllers/staff.controller");
 
 const staffRouter = express.Router();
 staffRouter.use(express.json());
 
-staffRouter.get("/", staffExample)
-
-staffRouter.put('/:fireID/deactivate', async (req, res) => {
+// GET all Staff documents
+staffRouter.get('/', async(_req, res) => {
     try {
-        await updateActiveStaff(req.params.fireID, false);
-        res.status(200).send("User deactivated");
+        let allStaff = await getAllStaff();
+        res.status(200).send(allStaff);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET Staff document matching param fireID
+staffRouter.get('/:fireID', async(req, res) => {
+    try {
+        let staff = await getStaffByID(req.params.fireID);
+        res.status(200).send(staff);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// PUT active to true for Staff document matching 
+//     param fireID
+staffRouter.put('/:fireID/activate', async (req, res) => {
+    try {
+        await updateStaff(req.params.fireID, {active: true});
+        res.status(200).send("Staff activated");
     } catch (err) {
         res.status(500).send(err);
     }
 });
 
-staffRouter.put('/:fireID/activate', async (req, res) => {
+// PUT active to false for Staff document matching 
+//     param fireID
+staffRouter.put('/:fireID/deactivate', async (req, res) => {
     try {
-        await updateActiveStaff(req.params.fireID, true);
-        res.status(200).send("User activated");
+        await updateStaff(req.params.fireID, {active: false});
+        res.status(200).send("Staff deactivated");
     } catch (err) {
         res.status(500).send(err);
     }
