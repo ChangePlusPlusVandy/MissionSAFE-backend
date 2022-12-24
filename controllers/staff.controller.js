@@ -1,3 +1,5 @@
+const Staff = require("../models/Staff").model;
+
 const staffExample = (req, res) => {
     res.status(200).send("Hi from /users/staff/")
 }
