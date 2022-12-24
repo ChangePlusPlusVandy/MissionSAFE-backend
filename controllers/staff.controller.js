@@ -6,11 +6,8 @@ const staffExample = (req, res) => {
 
 const updateActiveStaff = async (fireID, update) => {
     try {
-        const staff = await Staff.findOne({fireID: fireID});
-    if(!staff) throw new Error("Staff not found");
-
-    staff.active = update;
-    await staff.save();
+        const staff = await Staff.findOneAndUpdate({fireID: fireID}, {active: update});
+        if(!staff) throw new Error("Staff not found");
     } catch (err) {
         throw err;
     }
