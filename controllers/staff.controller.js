@@ -5,10 +5,9 @@ const staffExample = (req, res) => {
 // TODO: pass in fire ID, boolean to set user's active property to false
 const deactivateStaff = async (fireID) => {
     try {
-        const staff = await Staff.findOne({fireID: fireID});
+        const staff = await Staff.findOneAndUpdate({fireID: fireID}, {active: false});
     if(!staff) throw new Error("Staff not found");
 
-    staff.active = false;
     await staff.save();
     } catch (err) {
         throw err;
@@ -18,10 +17,9 @@ const deactivateStaff = async (fireID) => {
 // TODO: pass in fire ID, boolean to set user's active property to true
 const activateStaff = async (fireID) => {
     try {
-        const staff = await Staff.findOne({fireID: fireID});
+        const staff = await Staff.findOneAndUpdate({fireID: fireID}, {active: true});
     if(!staff) throw new Error("Staff not found");
 
-    staff.active = true;
     await staff.save();
     } catch (err) {
         throw err;
