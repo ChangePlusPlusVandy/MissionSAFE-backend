@@ -46,6 +46,16 @@ youthRouter.put('/:fireID/deactivate', async(req, res) => {
     }
 })
 
+// PUT new form in notes for youth matching param
+//     fireID
+youthRouter.put('/:fireID/newForm', async(req, res) => {
+    try {
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
 // PUT mark youth with param fireID as present at
 //     event with param eventID
 youthRouter.put('/:fireID/:eventCode/attend', async(req, res) => {

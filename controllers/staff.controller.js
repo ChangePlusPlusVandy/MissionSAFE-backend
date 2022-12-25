@@ -41,10 +41,9 @@ const createEvent = async (fireID, options) => {
     });
 
     try {
-        const savedEvent = await newEvent.save();
-        res.status(200).send(savedEvent);
+        await newEvent.save();
     } catch (err) {
-        res.status(500).send(err);
+        throw err
     }
 }
 
@@ -60,7 +59,7 @@ const addStaffToEvent = async (fireID, eventCode) => {
 
         await event.save();
     } catch (err) {
-        res.status(500).send(err);
+        throw err
     }
 }
 

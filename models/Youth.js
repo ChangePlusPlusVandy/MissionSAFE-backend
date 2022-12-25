@@ -9,7 +9,8 @@ let Youth = new Schema({
     fireID:  { type: String, required: true, index: {unique: true}},
     programs: { type: [String] },
     active: { type: Boolean, default: false },
-    attended_events: { type: [String], default: []} // by event.code
+    attached_forms: { type: [String], default: []}, // by Form._id
+    attended_events: { type: [String], default: []}, // by Event.code
 })
 
 module.exports = {
