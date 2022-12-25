@@ -1,4 +1,5 @@
 const Youth = require("../models/Youth").model;
+const Event = require("../models/Event").model;
 
 const getAllYouth = async () => {
     try {
@@ -29,8 +30,15 @@ const updateYouth = async (fireID, update) => {
     }
 }
 
+const attendEvent = async (fireID, eventID) => {
+    // find event by eventID
+    // add youth to attendees by fireID
+    // add event to events by eventID
+}
+
 module.exports = { 
     getAllYouth,
     getYouthByID,
     updateYouth,
+    attendEvent,
 }

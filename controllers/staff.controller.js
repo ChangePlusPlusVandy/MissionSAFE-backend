@@ -1,4 +1,5 @@
 const Staff = require("../models/Staff").model;
+const Event = require("../models/Event").model;
 
 const getAllStaff = async () => {
     try {
@@ -27,6 +28,10 @@ const updateStaff = async (fireID, update) => {
     } catch (err) {
         throw err;
     }
+}
+
+const createEvent = async (fireID) => {
+    // create event, get eventID
 }
 
 module.exports = { 

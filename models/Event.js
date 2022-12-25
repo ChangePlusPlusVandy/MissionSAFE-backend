@@ -8,9 +8,8 @@ const Form = require("./Form").schema;
 let Event = new Schema({
     date: { type: Date, required: true}, 
     programs: { type: [String], required: true},
-    staff: { type: [Staff], required: true},
-    invited_youth: { type: [Youth], required: true},
-    attended_youth: { type: [Youth], required: false},
+    staff: { type: [String], required: true}, // by fireIDs
+    attended_youth: { type: [String], required: false}, // by fireIDs
     attached_notes: { type: [Form], required: false},
 })
 
