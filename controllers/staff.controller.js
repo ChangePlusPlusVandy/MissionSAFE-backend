@@ -31,13 +31,13 @@ const updateStaff = async (fireID, update) => {
     }
 }
 
-const createEvent = async (fireID, options) => {
+const createEvent = async (options) => {
     const code = generateValidCode();
     const newEvent = new Event({
         code,
         date: new Date(),
         programs: options.programs,
-        staff: [fireID],
+        staff: [options.fireID],
     });
 
     try {
