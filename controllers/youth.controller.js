@@ -31,9 +31,21 @@ const updateYouth = async (fireID, update) => {
 }
 
 const attendEvent = async (fireID, eventID) => {
-    // find event by eventID
-    // add youth to attendees by fireID
-    // add event to events by eventID
+    try {
+        let event = await Event.findById(eventID);
+        if(!event) throw new Error("Event not found");
+
+        let youth = await Youth.findOne({fireID: fireID});
+        if(!youth) throw new Error("Youth not found");
+
+        event.attended_youth.push(fireID);
+        youth.attended_events.push(eventID);
+
+        await event.save();
+        await youth.save();
+    } catch (err) {
+        res.status(500).send(err);
+    }
 }
 
 module.exports = { 

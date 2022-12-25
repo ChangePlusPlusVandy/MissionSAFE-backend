@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllYouth, getYouthByID, updateYouth } = require("../controllers/youth.controller");
+const { getAllYouth, getYouthByID, updateYouth, attendEvent } = require("../controllers/youth.controller");
 
 const youthRouter = express.Router();
 youthRouter.use(express.json());
@@ -41,6 +41,17 @@ youthRouter.put('/:fireID/deactivate', async(req, res) => {
     try {
         await updateYouth(req.params.fireID, {active: false});
         res.status(200).send("Youth deactivated");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
+// PUT mark youth with param fireID as present at
+//     event with param eventID
+youthRouter.put('/:fireID/:eventID/attend', async(req, res) => {
+    try {
+        await attendEvent(req.params.fireID, req.params.eventID);
+        res.status(200).send("Youth marked as present");
     } catch (err) {
         res.status(500).send(err);
     }

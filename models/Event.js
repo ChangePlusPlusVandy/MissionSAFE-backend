@@ -9,8 +9,8 @@ let Event = new Schema({
     date: { type: Date, required: true}, 
     programs: { type: [String], required: true},
     staff: { type: [String], required: true}, // by fireIDs
-    attended_youth: { type: [String], required: false}, // by fireIDs
-    attached_notes: { type: [Form], required: false},
+    attended_youth: { type: [String], default: []}, // by fireIDs
+    attached_notes: { type: [Form], default: []},
 })
 
 module.exports = {

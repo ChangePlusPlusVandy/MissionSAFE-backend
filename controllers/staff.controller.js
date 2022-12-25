@@ -30,12 +30,24 @@ const updateStaff = async (fireID, update) => {
     }
 }
 
-const createEvent = async (fireID) => {
-    // create event, get eventID
+const createEvent = async (fireID, options) => {
+    const newEvent = new Event({
+        date: new Date(),
+        programs: options.programs,
+        staff: [fireID],
+    });
+
+    try {
+        const savedEvent = await newEvent.save();
+        res.status(200).send(savedEvent);
+    } catch (err) {
+        res.status(500).send(err);
+    }
 }
 
 module.exports = { 
     getAllStaff,
     getStaffByID,
     updateStaff,
+    createEvent,
 }

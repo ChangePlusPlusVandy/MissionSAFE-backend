@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllStaff, getStaffByID, updateStaff } = require("../controllers/staff.controller");
+const { getAllStaff, getStaffByID, updateStaff, createEvent } = require("../controllers/staff.controller");
 
 const staffRouter = express.Router();
 staffRouter.use(express.json());
@@ -21,6 +21,16 @@ staffRouter.get('/:fireID', async(req, res) => {
         res.status(200).send(staff);
     } catch (err) {
         res.status(404).send(err);
+    }
+})
+
+// POST Event document for staff with param fireID
+staffRouter.post('/:fireID/event', async (req, res) => {
+    try {
+        let event = await createEvent(req.params.fireID, req.body);
+        res.status(200).send(event);
+    } catch (err) {
+        res.status(500).send(err);
     }
 })
 
