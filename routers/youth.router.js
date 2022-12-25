@@ -1,5 +1,6 @@
 const express = require("express");
 const { getAllYouth, getYouthByID, updateYouth } = require("../controllers/youth.controller");
+const { addFormToYouth } = require("../controllers/form.controller");
 
 const youthRouter = express.Router();
 youthRouter.use(express.json());
@@ -50,7 +51,8 @@ youthRouter.put('/:fireID/deactivate', async(req, res) => {
 //     fireID
 youthRouter.put('/:fireID/newForm', async(req, res) => {
     try {
-
+        await addFormToYouth(req.params.fireID, req.body);
+        res.status(200).send("Form added");
     } catch (err) {
         res.status(500).send(err);
     }
