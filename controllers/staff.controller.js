@@ -48,6 +48,22 @@ const createEvent = async (fireID, options) => {
     }
 }
 
+const addStaffToEvent = async (fireID, eventCode) => {
+    try {
+        let event = await Event.findOne({code: eventCode});
+        if(!event) throw new Error("Event not found");
+
+        let staff = await Staff.findOne({fireID: fireID});
+        if(!staff) throw new Error("Staff not found");
+
+        event.staff.push(fireID);
+
+        await event.save();
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
 function generateRandomCode() {
     let newCode = "";
     for(let i = 0; i < 5; i++) {
@@ -73,4 +89,5 @@ module.exports = {
     getStaffByID,
     updateStaff,
     createEvent,
+    addStaffToEvent,
 }

@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllStaff, getStaffByID, updateStaff, createEvent } = require("../controllers/staff.controller");
+const { getAllStaff, getStaffByID, updateStaff, createEvent, addStaffToEvent } = require("../controllers/staff.controller");
 
 const staffRouter = express.Router();
 staffRouter.use(express.json());
@@ -28,6 +28,16 @@ staffRouter.get('/:fireID', async(req, res) => {
 staffRouter.post('/:fireID/event', async (req, res) => {
     try {
         let event = await createEvent(req.params.fireID, req.body);
+        res.status(200).send(event);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
+// PUT param fireID as staff for event at param eventCode
+staffRouter.put('/:fireID/event/:eventCode', async (req, res) => {
+    try {
+        let event = await addStaffToEvent(req.params.fireID, req.params.eventCode);
         res.status(200).send(event);
     } catch (err) {
         res.status(500).send(err);
