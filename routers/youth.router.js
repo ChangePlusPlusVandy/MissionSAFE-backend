@@ -48,9 +48,9 @@ youthRouter.put('/:fireID/deactivate', async(req, res) => {
 
 // PUT mark youth with param fireID as present at
 //     event with param eventID
-youthRouter.put('/:fireID/:eventID/attend', async(req, res) => {
+youthRouter.put('/:fireID/:eventCode/attend', async(req, res) => {
     try {
-        await attendEvent(req.params.fireID, req.params.eventID);
+        await attendEvent(req.params.fireID, req.params.eventCode);
         res.status(200).send("Youth marked as present");
     } catch (err) {
         res.status(500).send(err);
