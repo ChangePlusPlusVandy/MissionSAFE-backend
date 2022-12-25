@@ -6,12 +6,12 @@ const Youth = require("./Youth").schema;
 const Form = require("./Form").schema;
 
 let Event = new Schema({
+    code: { type: String, required: true},
     date: { type: Date, required: true}, 
     programs: { type: [String], required: true},
-    staff: { type: [Staff], required: true},
-    invited_youth: { type: [Youth], required: true},
-    attended_youth: { type: [Youth], required: false},
-    attached_notes: { type: [Form], required: false},
+    staff: { type: [String], required: true}, // by Staff.fireID
+    attended_youth: { type: [String], default: []}, // by Youth.fireID
+    attached_forms: { type: [String], default: []}, // by Note._id
 })
 
 module.exports = {

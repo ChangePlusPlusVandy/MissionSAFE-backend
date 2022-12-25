@@ -1,4 +1,6 @@
 const Youth = require("../models/Youth").model;
+const Event = require("../models/Event").model;
+const Form = require("../models/Form").model;
 
 const getAllYouth = async () => {
     try {
@@ -29,8 +31,27 @@ const updateYouth = async (fireID, update) => {
     }
 }
 
+const attendEvent = async (fireID, eventCode) => {
+    try {
+        let event = await Event.findOne({code: eventCode});
+        if(!event) throw new Error("Event not found");
+
+        let youth = await Youth.findOne({fireID: fireID});
+        if(!youth) throw new Error("Youth not found");
+
+        event.attended_youth.push(fireID);
+        youth.attended_events.push(eventCode);
+
+        await event.save();
+        await youth.save();
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = { 
     getAllYouth,
     getYouthByID,
     updateYouth,
+    attendEvent,
 }
