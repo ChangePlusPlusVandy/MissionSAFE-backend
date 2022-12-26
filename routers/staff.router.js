@@ -1,5 +1,12 @@
 const express = require("express");
-const { getAllStaff, getStaffByID, updateStaff } = require("../controllers/staff.controller");
+const { 
+    getAllStaff,
+    getStaffByActive, 
+    getStaffByID,
+    getStaffByEmail,
+    getStaffByProgram, 
+    updateStaff 
+} = require("../controllers/staff.controller");
 
 const staffRouter = express.Router();
 staffRouter.use(express.json());
@@ -14,10 +21,50 @@ staffRouter.get('/', async(_req, res) => {
     }
 })
 
+// GET active Staff
+staffRouter.get('/active', async(_req, res) => {
+    try {
+        let activeStaff = await getStaffByActive(true);
+        res.status(200).send(activeStaff);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET inactive Staff
+staffRouter.get('/inactive', async(_req, res) => {
+    try {
+        let inactiveStaff = await getStaffByActive(false);
+        res.status(200).send(inactiveStaff);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
 // GET Staff document matching param fireID
 staffRouter.get('/:fireID', async(req, res) => {
     try {
         let staff = await getStaffByID(req.params.fireID);
+        res.status(200).send(staff);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET Youth document matching param email
+staffRouter.get('/:email', async(req, res) => {
+    try {
+        let staff = await getStaffByEmail(req.params.email);
+        res.status(200).send(staff);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET Youth documents enrolled in param program
+staffRouter.get('/:program', async(req, res) => {
+    try {
+        let staff = await getStaffByProgram(req.params.program);
         res.status(200).send(staff);
     } catch (err) {
         res.status(404).send(err);

@@ -8,8 +8,26 @@ const getAllStaff = async () => {
     return allStaff;
 }
 
+const getStaffByActive = async (active) => {
+    const staff = await Staff.find({active});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
+}
+
 const getStaffByID = async (fireID) => {
     const staff = await Staff.findOne({fireID});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
+}
+
+const getStaffByEmail = async (email) => {
+    const staff = await Staff.findOne({email});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
+}
+
+const getStaffByProgram = async (program) => {
+    const staff = await Staff.find({programs: program});
     if(!staff) throw new Error("Staff not found");
     return staff;
 }
@@ -65,7 +83,10 @@ async function generateValidCode() {
 
 module.exports = { 
     getAllStaff,
+    getStaffByActive, 
     getStaffByID,
+    getStaffByEmail,
+    getStaffByProgram, 
     updateStaff,
     createEvent,
     addStaffToEvent,
