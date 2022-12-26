@@ -3,7 +3,7 @@ const Event = require("../models/Event").model;
 const Form = require("../models/Form").model;
 
 const addFormToYouth = async (fireID, options) => {
-    let youth = await Youth.findOne({fireID: fireID});
+    let youth = await Youth.findOne({fireID});
     if(!youth) throw new Error("Youth not found");
 
     const newNote = new Form({
@@ -19,7 +19,7 @@ const addFormToYouth = async (fireID, options) => {
 }
 
 const addFormToEvent = async (eventCode, options) => {
-    let event = await Event.findOne({eventCode: eventCode});
+    let event = await Event.findOne({code: eventCode});
     if(!event) throw new Error("Event not found");
 
     const newNote = new Form({

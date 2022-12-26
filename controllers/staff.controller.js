@@ -9,13 +9,13 @@ const getAllStaff = async () => {
 }
 
 const getStaffByID = async (fireID) => {
-    const staff = await Staff.findOne({fireID: fireID});
+    const staff = await Staff.findOne({fireID});
     if(!staff) throw new Error("Staff not found");
     return staff;
 }
 
 const updateStaff = async (fireID, update) => {
-    const staff = await Staff.findOneAndUpdate({fireID: fireID}, update);
+    const staff = await Staff.findOneAndUpdate({fireID}, update);
     if(!staff) throw new Error("Staff not found");
 }
 
@@ -35,7 +35,7 @@ const addStaffToEvent = async (fireID, eventCode) => {
     let event = await Event.findOne({code: eventCode});
     if(!event) throw new Error("Event not found");
 
-    let staff = await Staff.findOne({fireID: fireID});
+    let staff = await Staff.findOne({fireID});
     if(!staff) throw new Error("Staff not found");
 
     event.staff.push(fireID);
