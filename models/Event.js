@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Staff = require("./Staff").schema;
-const Youth = require("./Youth").schema;
-const Form = require("./Form").schema;
-
 let Event = new Schema({
     code: { type: String, required: true},
     date: { type: Date, required: true}, 
