@@ -1,5 +1,12 @@
 const express = require("express");
-const { getAllYouth, getYouthByID, updateYouth } = require("../controllers/youth.controller");
+const { 
+    getAllYouth,
+    getYouthByActive,
+    getYouthByID,
+    getYouthByEmail,
+    getYouthByProgram,
+    updateYouth, 
+} = require("../controllers/youth.controller");
 const { addFormToYouth } = require("../controllers/form.controller");
 
 const youthRouter = express.Router();
@@ -15,10 +22,51 @@ youthRouter.get('/', async(_req, res) => {
     }
 })  
 
+// GET active Youth
+youthRouter.get('/active', async(_req, res) => {
+    try {
+        let activeYouth = await getYouthByActive(true);
+        res.status(200).send(activeYouth);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET inactive Youth
+youthRouter.get('/inactive', async(_req, res) => {
+    try {
+        let inactiveYouth = await getYouthByActive(false);
+        res.status(200).send(inactiveYouth);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+
 // GET Youth document matching param fireID
 youthRouter.get('/:fireID', async(req, res) => {
     try {
         let youth = await getYouthByID(req.params.fireID);
+        res.status(200).send(youth);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET Youth document matching param email
+youthRouter.get('/:email', async(req, res) => {
+    try {
+        let youth = await getYouthByEmail(req.params.email);
+        res.status(200).send(youth);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
+// GET Youth documents enrolled in param program
+youthRouter.get('/:program', async(req, res) => {
+    try {
+        let youth = await getYouthByProgram(req.params.program);
         res.status(200).send(youth);
     } catch (err) {
         res.status(404).send(err);
