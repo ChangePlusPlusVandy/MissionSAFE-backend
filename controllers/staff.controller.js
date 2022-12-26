@@ -3,32 +3,38 @@ const Event = require("../models/Event").model;
 const codeCharacters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const getAllStaff = async () => {
-    try {
-        const allStaff = await Staff.find({});
-        if(!allStaff) throw new Error("No staff found");
-        return allStaff;
-    } catch (err) {
-        throw err;
-    }
+    const allStaff = await Staff.find({});
+    if(!allStaff) throw new Error("No staff found");
+    return allStaff;
+}
+
+const getStaffByActive = async (active) => {
+    const staff = await Staff.find({active});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
 }
 
 const getStaffByID = async (fireID) => {
-    try {
-        const staff = await Staff.findOne({fireID: fireID});
-        if(!staff) throw new Error("Staff not found");
-        return staff;
-    } catch (err) {
-        throw err;
-    }
+    const staff = await Staff.findOne({fireID});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
+}
+
+const getStaffByEmail = async (email) => {
+    const staff = await Staff.findOne({email});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
+}
+
+const getStaffByProgram = async (program) => {
+    const staff = await Staff.find({programs: program});
+    if(!staff) throw new Error("Staff not found");
+    return staff;
 }
 
 const updateStaff = async (fireID, update) => {
-    try {
-        const staff = await Staff.findOneAndUpdate({fireID: fireID}, update);
-        if(!staff) throw new Error("Staff not found");
-    } catch (err) {
-        throw err;
-    }
+    const staff = await Staff.findOneAndUpdate({fireID}, update);
+    if(!staff) throw new Error("Staff not found");
 }
 
 const createEvent = async (options) => {
@@ -40,27 +46,19 @@ const createEvent = async (options) => {
         staff: [options.fireID],
     });
 
-    try {
-        await newEvent.save();
-    } catch (err) {
-        throw err
-    }
+    await newEvent.save();
 }
 
 const addStaffToEvent = async (fireID, eventCode) => {
-    try {
-        let event = await Event.findOne({code: eventCode});
-        if(!event) throw new Error("Event not found");
+    let event = await Event.findOne({code: eventCode});
+    if(!event) throw new Error("Event not found");
 
-        let staff = await Staff.findOne({fireID: fireID});
-        if(!staff) throw new Error("Staff not found");
+    let staff = await Staff.findOne({fireID});
+    if(!staff) throw new Error("Staff not found");
 
-        event.staff.push(fireID);
+    event.staff.push(fireID);
 
-        await event.save();
-    } catch (err) {
-        throw err
-    }
+    await event.save();
 }
 
 function generateRandomCode() {
@@ -85,7 +83,10 @@ async function generateValidCode() {
 
 module.exports = { 
     getAllStaff,
+    getStaffByActive, 
     getStaffByID,
+    getStaffByEmail,
+    getStaffByProgram, 
     updateStaff,
     createEvent,
     addStaffToEvent,
