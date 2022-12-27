@@ -22,6 +22,16 @@ staffRouter.get('/', async(_req, res) => {
     }
 })
 
+// POST add new Staff document
+staffRouter.post("/", async (req, res) => {
+    try {
+        let newStaff = await createStaff(req.body);
+        res.status(201).send(newStaff);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
 // GET active Staff
 staffRouter.get('/active', async(_req, res) => {
     try {
@@ -93,16 +103,6 @@ staffRouter.put('/:fireID/deactivate', async (req, res) => {
         res.status(500).send(err);
     }
 });
-
-// POST add new Staff document
-staffRouter.post("/", async (req, res) => {
-    try {
-        let newStaff = await createStaff(req.body);
-        res.status(201).send(newStaff);
-    } catch (err) {
-        res.status(500).send(err);
-    }
-})
 
 module.exports = {
     staffRouter

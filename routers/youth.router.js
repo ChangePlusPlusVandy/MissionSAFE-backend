@@ -23,6 +23,16 @@ youthRouter.get('/', async(_req, res) => {
     }
 })  
 
+// POST adding new Youth document
+youthRouter.post("/", async (req, res) => {
+    try {
+        let newYouth = await createYouth(req.body);
+        res.status(201).send(newYouth);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
 // GET active Youth
 youthRouter.get('/active', async(_req, res) => {
     try {
@@ -102,16 +112,6 @@ youthRouter.put('/:fireID/newForm', async(req, res) => {
     try {
         await addFormToYouth(req.params.fireID, req.body);
         res.status(200).send("Form added");
-    } catch (err) {
-        res.status(500).send(err);
-    }
-})
-
-// POST adding new Youth document
-youthRouter.post("/", async (req, res) => {
-    try {
-        let newYouth = await createYouth(req.body);
-        res.status(201).send(newYouth);
     } catch (err) {
         res.status(500).send(err);
     }
