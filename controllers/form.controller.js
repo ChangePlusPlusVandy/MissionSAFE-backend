@@ -10,7 +10,7 @@ const addFormToYouth = async (fireID, options) => {
         date: new Date(),
         content: options.content,
         programs: options.programs,
-        associated_youth_id: options.associated_youth_id,
+        associated_youth_id: fireID,
     })
     await newNote.save();
 
@@ -26,7 +26,7 @@ const addFormToEvent = async (eventCode, options) => {
         date: new Date(),
         content: options.content,
         programs: options.programs,
-        associated_event_id: options.associated_event_id,
+        associated_event_id: eventCode,
     })
     await newNote.save();
 

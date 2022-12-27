@@ -16,7 +16,7 @@ eventRouter.post('/', async (req, res) => {
 })
 
 // PUT param fireID as staff for event at param eventCode
-eventRouter.put('/:eventCode', async (req, res) => {
+eventRouter.put('addStaff/:eventCode', async (req, res) => {
     try {
         let event = await addStaffToEvent(req.body.fireID, req.params.eventCode);
         res.status(200).send(event);
@@ -27,7 +27,7 @@ eventRouter.put('/:eventCode', async (req, res) => {
 
 // PUT mark youth with param fireID as present at
 //     event with param eventID
-eventRouter.put('/:eventCode/attend', async(req, res) => {
+eventRouter.put('/attend/:eventCode', async(req, res) => {
     try {
         await attendEvent(req.body.fireID, req.params.eventCode);
         res.status(200).send("Youth marked as present");
@@ -38,7 +38,7 @@ eventRouter.put('/:eventCode/attend', async(req, res) => {
 
 // PUT new form in notes for event matching param
 //     eventCode
-eventRouter.put('/:eventCode/form', async(req, res) => {
+eventRouter.put('/form/:eventCode', async(req, res) => {
     try {
         await addFormToEvent(req.params.eventCode, req.body);
         res.status(200).send("Form added");

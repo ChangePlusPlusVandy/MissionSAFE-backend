@@ -53,7 +53,7 @@ staffRouter.get('/inactive', async(_req, res) => {
 })
 
 // GET Staff document matching param fireID
-staffRouter.get('/:fireID', async(req, res) => {
+staffRouter.get('/byID/:fireID', async(req, res) => {
     try {
         let staff = await getStaffByID(req.params.fireID);
         res.status(200).send(staff);
@@ -63,7 +63,7 @@ staffRouter.get('/:fireID', async(req, res) => {
 })
 
 // GET Youth document matching param email
-staffRouter.get('/:email', async(req, res) => {
+staffRouter.get('/byEmail/:email', async(req, res) => {
     try {
         let staff = await getStaffByEmail(req.params.email);
         res.status(200).send(staff);
@@ -73,7 +73,7 @@ staffRouter.get('/:email', async(req, res) => {
 })
 
 // GET Youth documents enrolled in param program
-staffRouter.get('/:program', async(req, res) => {
+staffRouter.get('/byProgram/:program', async(req, res) => {
     try {
         let staff = await getStaffByProgram(req.params.program);
         res.status(200).send(staff);
@@ -84,7 +84,7 @@ staffRouter.get('/:program', async(req, res) => {
 
 // PUT active to true for Staff document matching 
 //     param fireID
-staffRouter.put('/:fireID/activate', async (req, res) => {
+staffRouter.put('/activate/:fireID', async (req, res) => {
     try {
         await updateStaff(req.params.fireID, {active: true});
         res.status(200).send("Staff activated");
@@ -95,7 +95,7 @@ staffRouter.put('/:fireID/activate', async (req, res) => {
 
 // PUT active to false for Staff document matching 
 //     param fireID
-staffRouter.put('/:fireID/deactivate', async (req, res) => {
+staffRouter.put('/deactivate/:fireID', async (req, res) => {
     try {
         await updateStaff(req.params.fireID, {active: false});
         res.status(200).send("Staff deactivated");

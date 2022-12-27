@@ -44,7 +44,7 @@ const updateStaff = async (fireID, update) => {
 }
 
 const createEvent = async (options) => {
-    const code = generateValidCode();
+    const code = await generateValidCode();
     const newEvent = new Event({
         code,
         date: new Date(),
