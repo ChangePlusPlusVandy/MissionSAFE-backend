@@ -1,6 +1,7 @@
 const express = require("express");
 const { 
     getAllYouth,
+    createYouth,
     getYouthByActive,
     getYouthByID,
     getYouthByEmail,
@@ -21,6 +22,16 @@ youthRouter.get('/', async(_req, res) => {
         res.status(404).send(err);
     }
 })  
+
+// POST adding new Youth document
+youthRouter.post("/", async (req, res) => {
+    try {
+        let newYouth = await createYouth(req.body);
+        res.status(201).send(newYouth);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
 
 // GET active Youth
 youthRouter.get('/active', async(_req, res) => {

@@ -7,6 +7,12 @@ const getAllYouth = async () => {
     return allYouth;
 }
 
+const createYouth = async (options) => {
+    const newYouth = new Youth(options)
+    await newYouth.save();
+    return newYouth;
+}
+
 const getYouthByActive = async (active) => {
     const youth = await Youth.find({active});
     if(!youth) throw new Error("Youth not found");
@@ -52,6 +58,7 @@ const attendEvent = async (fireID, eventCode) => {
 
 module.exports = { 
     getAllYouth,
+    createYouth,
     getYouthByActive,
     getYouthByID,
     getYouthByEmail,

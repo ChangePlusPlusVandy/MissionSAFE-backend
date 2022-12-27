@@ -1,6 +1,7 @@
 const express = require("express");
 const { 
     getAllStaff,
+    createStaff,
     getStaffByActive, 
     getStaffByID,
     getStaffByEmail,
@@ -18,6 +19,16 @@ staffRouter.get('/', async(_req, res) => {
         res.status(200).send(allStaff);
     } catch (err) {
         res.status(404).send(err);
+    }
+})
+
+// POST add new Staff document
+staffRouter.post("/", async (req, res) => {
+    try {
+        let newStaff = await createStaff(req.body);
+        res.status(201).send(newStaff);
+    } catch (err) {
+        res.status(500).send(err);
     }
 })
 
