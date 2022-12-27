@@ -38,7 +38,7 @@ eventRouter.put('/:eventCode/attend', async(req, res) => {
 
 // PUT new form in notes for event matching param
 //     eventCode
-eventRouter.put('/:eventCode/newForm', async(req, res) => {
+eventRouter.put('/:eventCode/form', async(req, res) => {
     try {
         await addFormToEvent(req.params.eventCode, req.body);
         res.status(200).send("Form added");

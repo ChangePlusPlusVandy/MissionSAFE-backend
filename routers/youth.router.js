@@ -108,7 +108,7 @@ youthRouter.put('/:fireID/deactivate', async(req, res) => {
 
 // PUT new form in notes for youth matching param
 //     fireID
-youthRouter.put('/:fireID/newForm', async(req, res) => {
+youthRouter.put('/:fireID/form', async(req, res) => {
     try {
         await addFormToYouth(req.params.fireID, req.body);
         res.status(200).send("Form added");
