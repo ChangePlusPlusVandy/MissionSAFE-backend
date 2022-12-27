@@ -93,6 +93,17 @@ staffRouter.put('/:fireID/deactivate', async (req, res) => {
     }
 });
 
+//POST adding new youths
+staffRouter.post("/newYouth", async (req, res) => {
+    const newStaff = new Staff({...req.body})
+    try { 
+        await newStaff.save()
+        res.status(200).send("Youth successfully added")
+    } catch (error){
+        res.status(500).send(error)
+    }
+})
+
 module.exports = {
     staffRouter
 };
