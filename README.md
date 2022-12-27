@@ -1,7 +1,7 @@
 # MissionSAFE-backend
 
 This is the repository for our server, which communicates with a MongoDB cluster.
-The routes and their behavior are as follows ( * indicates not completed ):
+The routes and their behavior are as follows ( [*] indicates not completed ):
 
 - /api
     - /users
@@ -25,17 +25,17 @@ The routes and their behavior are as follows ( * indicates not completed ):
             - GET /:program # Get all Youth in program
             - /:fireID
                 - GET / # Get Youth with fireID
-                - * GET /forms # Get Forms for Youth with fireID
-                - * GET /events # Get Events for Youth with fireID
+                - [*] GET /forms # Get Forms for Youth with fireID
+                - [*] GET /events # Get Events for Youth with fireID
                 - PUT /activate # Activate Youth with fireID
                 - PUT /deactivate # Deactivate Youth with fireID
                 - PUT /form # Add Form to Youth with fireID
     - /events
         - POST / # Create event
         - /:eventCode
-            - * GET / # Get Event with eventCode
-            - * GET /forms # Get all Forms for Event with eventCode
-            - * GET /staff # Get all Staff for Event with eventCode
+            - [*] GET / # Get Event with eventCode
+            - [*] GET /forms # Get all Forms for Event with eventCode
+            - [*] GET /staff # Get all Staff for Event with eventCode
             - PUT / # Add Staff to Event with eventCode
             - PUT /attend # Add Youth to Event with eventCode
             - PUT /form # Add Form to Event with eventCode
