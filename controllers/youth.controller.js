@@ -1,5 +1,6 @@
 const Youth = require("../models/Youth").model;
 const Event = require("../models/Event").model;
+const Form = require("../models/Form").model;
 
 const getAllYouth = async () => {
     const allYouth = await Youth.find({});
@@ -37,6 +38,28 @@ const getYouthByProgram = async (program) => {
     return youth;
 }
 
+const getFormsForYouth = async (fireID) => {
+    const youth = await Youth.findOne({fireID});
+    if(!youth) throw new Error("Youth not found");
+
+    let forms = youth.attached_forms.map(async formID => { // Batch request for forms
+        return Form.findById(formID);
+    })
+
+    return await Promise.all(forms); // Wait for all requests
+}
+
+const getEventsForYouth = async (fireID) => {
+    const youth = await Youth.findOne({fireID});
+    if(!youth) throw new Error("Youth not found");
+
+    let events = youth.attended_events.map(async eventCode => { // Batch request for events
+        return Event.findOne({code: eventCode});
+    })
+
+    return await Promise.all(events); // Wait for all requests
+}
+
 const updateYouth = async (fireID, update) => {
     const youth = await Youth.findOneAndUpdate({fireID}, update);
     if(!youth) throw new Error("Youth not found");
@@ -63,6 +86,8 @@ module.exports = {
     getYouthByID,
     getYouthByEmail,
     getYouthByProgram,
+    getFormsForYouth,
+    getEventsForYouth,
     updateYouth,
     attendEvent,
 }

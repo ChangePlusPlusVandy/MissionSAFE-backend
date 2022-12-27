@@ -6,6 +6,8 @@ const {
     getYouthByID,
     getYouthByEmail,
     getYouthByProgram,
+    getFormsForYouth,
+    getEventsForYouth,
     updateYouth, 
 } = require("../controllers/youth.controller");
 const { addFormToYouth } = require("../controllers/form.controller");
@@ -106,12 +108,32 @@ youthRouter.put('/deactivate/:fireID', async(req, res) => {
     }
 })
 
-// PUT new form in notes for youth matching param
+// PUT new Form in notes for Youth matching param
 //     fireID
 youthRouter.put('/form/:fireID', async(req, res) => {
     try {
         await addFormToYouth(req.params.fireID, req.body);
         res.status(200).send("Form added");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
+// GET all Forms for youth matching param fireID
+youthRouter.get('/forms/:fireID', async(req, res) => {
+    try {
+        let forms = await getFormsForYouth(req.params.fireID);
+        res.status(200).send(forms);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+})
+
+// GET all Events for youth matching param fireID
+youthRouter.get('/events/:fireID', async(req, res) => {
+    try {
+        let events = await getEventsForYouth(req.params.fireID);
+        res.status(200).send(events);
     } catch (err) {
         res.status(500).send(err);
     }

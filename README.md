@@ -23,11 +23,11 @@ The routes and their behavior are as follows ( [*] indicates not completed ):
             - GET byEmail/:email # Get Youth with email
             - GET byProgram/:program # Get all Youth in program
             - GET byID/:fireID # Get Youth with fireID
+            - GET /forms/:fireID # Get Forms for Youth with fireID
+            - GET /events/:fireID # Get Events for Youth with fireID
             - PUT /activate/:fireID # Activate Youth with fireID
             - PUT /deactivate/:fireID # Deactivate Youth with fireID
             - PUT /form/:fireID # Add Form to Youth with fireID
-            - [*] GET /forms/:fireID # Get Forms for Youth with fireID
-            - [*] GET /events/:fireID # Get Events for Youth with fireID
     - /events
         - POST / # Create event
         - PUT /addStaff/:eventCode # Add Staff to Event with eventCode
