@@ -6,7 +6,7 @@ The routes and their behavior are as follows ( [*] indicates not completed ):
 - /api
     - /users
         - /staff
-            - GET / # Get all Staff
+            - GET / \t # Get all Staff
             - POST / # Create Staff
             - GET /active # Get all active Staff
             - GET /inactive # Get all inactive Staff
