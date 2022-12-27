@@ -1,6 +1,7 @@
 const express = require("express");
 const { 
     getAllYouth,
+    createYouth,
     getYouthByActive,
     getYouthByID,
     getYouthByEmail,
@@ -108,10 +109,9 @@ youthRouter.put('/:fireID/newForm', async(req, res) => {
 
 // POST adding new Youth document
 youthRouter.post("/", async (req, res) => {
-    const newYouth = new Youth({...req.body})
-    try { 
-        await newYouth.save();
-        res.status(201).send("Youth successfully added");
+    try {
+        let newYouth = await createYouth(req.body);
+        res.status(201).send(newYouth);
     } catch (err) {
         res.status(500).send(err);
     }

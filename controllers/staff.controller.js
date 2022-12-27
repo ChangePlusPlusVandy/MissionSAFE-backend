@@ -8,6 +8,12 @@ const getAllStaff = async () => {
     return allStaff;
 }
 
+const createStaff = async (options) => {
+    const newStaff = new Staff(options)
+    await newStaff.save();
+    return newStaff;
+}
+
 const getStaffByActive = async (active) => {
     const staff = await Staff.find({active});
     if(!staff) throw new Error("Staff not found");
@@ -83,6 +89,7 @@ async function generateValidCode() {
 
 module.exports = { 
     getAllStaff,
+    createStaff,
     getStaffByActive, 
     getStaffByID,
     getStaffByEmail,

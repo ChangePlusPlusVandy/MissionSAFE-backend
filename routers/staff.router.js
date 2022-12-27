@@ -1,6 +1,7 @@
 const express = require("express");
 const { 
     getAllStaff,
+    createStaff,
     getStaffByActive, 
     getStaffByID,
     getStaffByEmail,
@@ -95,12 +96,11 @@ staffRouter.put('/:fireID/deactivate', async (req, res) => {
 
 // POST add new Staff document
 staffRouter.post("/", async (req, res) => {
-    const newStaff = new Staff({...req.body})
-    try { 
-        await newStaff.save()
-        res.status(201).send("Staff successfully added")
-    } catch (error){
-        res.status(500).send(error)
+    try {
+        let newStaff = await createStaff(req.body);
+        res.status(201).send(newStaff);
+    } catch (err) {
+        res.status(500).send(err);
     }
 })
 
