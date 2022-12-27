@@ -12,10 +12,9 @@ app.use(express.json());
 app.use((_req, res, next) => {
     res.append('Access-Control-Allow-Origin', '*');
     res.append('Access-Control-Allow-Headers', '*');
-    res.append('Access-Control-Allow-Methods', '*');
+    res.append('Access-Control-Allow-Methods', ['POST', 'GET', 'PUT']);
     next();
 });
-    
 app.models = {
     Form: require("./models/Form").model,
     Staff: require("./models/Staff").model,
@@ -27,6 +26,7 @@ app.use("/api", router);
 
 app.listen(PORT, () => {
     mongoose.set('strictQuery', false);
-    mongoose.connect(process.env.MONGODB);
-    console.log(`Server starting @ PORT ${PORT}`);
+    mongoose.connect(process.env.MONGODB, () => {
+        console.log(`Server starting @ PORT ${PORT}`);
+    });
 });

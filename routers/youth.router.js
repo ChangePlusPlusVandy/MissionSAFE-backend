@@ -55,7 +55,7 @@ youthRouter.get('/inactive', async(_req, res) => {
 
 
 // GET Youth document matching param fireID
-youthRouter.get('/:fireID', async(req, res) => {
+youthRouter.get('/byID/:fireID', async(req, res) => {
     try {
         let youth = await getYouthByID(req.params.fireID);
         res.status(200).send(youth);
@@ -65,7 +65,7 @@ youthRouter.get('/:fireID', async(req, res) => {
 })
 
 // GET Youth document matching param email
-youthRouter.get('/:email', async(req, res) => {
+youthRouter.get('/byEmail/:email', async(req, res) => {
     try {
         let youth = await getYouthByEmail(req.params.email);
         res.status(200).send(youth);
@@ -75,7 +75,7 @@ youthRouter.get('/:email', async(req, res) => {
 })
 
 // GET Youth documents enrolled in param program
-youthRouter.get('/:program', async(req, res) => {
+youthRouter.get('/byProgram/:program', async(req, res) => {
     try {
         let youth = await getYouthByProgram(req.params.program);
         res.status(200).send(youth);
@@ -86,7 +86,7 @@ youthRouter.get('/:program', async(req, res) => {
 
 // PUT active to true for Youth document matching 
 //     param fireID
-youthRouter.put('/:fireID/activate', async(req, res) => {
+youthRouter.put('/activate/:fireID', async(req, res) => {
     try {
         await updateYouth(req.params.fireID, {active: true});
         res.status(200).send("Youth activated");
@@ -97,7 +97,7 @@ youthRouter.put('/:fireID/activate', async(req, res) => {
 
 // PUT active to false for Youth document matching 
 //     param fireID
-youthRouter.put('/:fireID/deactivate', async(req, res) => {
+youthRouter.put('/deactivate/:fireID', async(req, res) => {
     try {
         await updateYouth(req.params.fireID, {active: false});
         res.status(200).send("Youth deactivated");
@@ -108,7 +108,7 @@ youthRouter.put('/:fireID/deactivate', async(req, res) => {
 
 // PUT new form in notes for youth matching param
 //     fireID
-youthRouter.put('/:fireID/form', async(req, res) => {
+youthRouter.put('/form/:fireID', async(req, res) => {
     try {
         await addFormToYouth(req.params.fireID, req.body);
         res.status(200).send("Form added");
