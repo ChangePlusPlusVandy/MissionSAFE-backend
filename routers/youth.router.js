@@ -106,14 +106,14 @@ youthRouter.put('/:fireID/newForm', async(req, res) => {
     }
 })
 
-//POST adding new youths
-youthRouter.post("/newYouth", async (req, res) => {
+// POST adding new Youth document
+youthRouter.post("/", async (req, res) => {
     const newYouth = new Youth({...req.body})
     try { 
-        await newYouth.save()
-        res.status(200).send("Youth successfully added")
-    } catch (error){
-        res.status(500).send(error)
+        await newYouth.save();
+        res.status(201).send("Youth successfully added");
+    } catch (err) {
+        res.status(500).send(err);
     }
 })
 
