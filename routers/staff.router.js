@@ -104,6 +104,50 @@ staffRouter.put('/deactivate/:fireID', async (req, res) => {
     }
 });
 
+// PUT counselor to true for Staff document matching 
+//     param fireID
+staffRouter.put('/giveCounselor/:fireID', async (req, res) => {
+    try {
+        await updateStaff(req.params.fireID, {counselor: true});
+        res.status(200).send("Staff set as counselor");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+// PUT counselor to false for Staff document matching 
+//     param fireID
+staffRouter.put('/removeCounselor/:fireID', async (req, res) => {
+    try {
+        await updateStaff(req.params.fireID, {counselor: false});
+        res.status(200).send("Staff removed as counselor");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+// PUT admin to true for Staff document matching 
+//     param fireID
+staffRouter.put('/giveAdmin/:fireID', async (req, res) => {
+    try {
+        await updateStaff(req.params.fireID, {admin: true});
+        res.status(200).send("Staff given admin");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+// PUT admin to false for Staff document matching 
+//     param fireID
+staffRouter.put('/removeAdmin/:fireID', async (req, res) => {
+    try {
+        await updateStaff(req.params.fireID, {admin: false});
+        res.status(200).send("Staff removed admin");
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
 module.exports = {
     staffRouter
 };

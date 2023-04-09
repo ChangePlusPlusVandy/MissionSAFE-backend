@@ -9,6 +9,7 @@ let Staff = new Schema({
     programs: { type: [String] },
     active: { type: Boolean, default: false },
     counselor: { type: Boolean, default: false},
+    admin: { type: Boolean, default: false},
 })
 
 module.exports = {
