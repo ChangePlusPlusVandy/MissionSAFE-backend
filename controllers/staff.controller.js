@@ -53,6 +53,7 @@ const createEvent = async (options) => {
     });
 
     await newEvent.save();
+    return newEvent;
 }
 
 const addStaffToEvent = async (fireID, eventCode) => {
