@@ -29,7 +29,7 @@ eventRouter.put('addStaff/:eventCode', async (req, res) => {
 //     event with param eventID
 eventRouter.put('/attend/:eventCode', async(req, res) => {
     try {
-        await attendEvent(req.body.fireID, req.params.eventCode);
+        await attendEvent(req.body.email, req.params.eventCode);
         res.status(200).send("Youth marked as present");
     } catch (err) {
         res.status(500).send(err);
