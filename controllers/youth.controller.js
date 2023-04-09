@@ -65,14 +65,14 @@ const updateYouth = async (fireID, update) => {
     if(!youth) throw new Error("Youth not found");
 }
 
-const attendEvent = async (fireID, eventCode) => {
+const attendEvent = async (email, eventCode) => {
     let event = await Event.findOne({code: eventCode});
     if(!event) throw new Error("Event not found");
 
-    let youth = await Youth.findOne({fireID});
+    let youth = await Youth.findOne({email});
     if(!youth) throw new Error("Youth not found");
 
-    event.attended_youth.push(fireID);
+    event.attended_youth.push(youth.fireID);
     youth.attended_events.push(eventCode);
 
     await event.save();
