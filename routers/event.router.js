@@ -16,7 +16,7 @@ eventRouter.post('/', async (req, res) => {
 })
 
 // PUT param fireID as staff for event at param eventCode
-eventRouter.put('addStaff/:eventCode', async (req, res) => {
+eventRouter.put('/addStaff/:eventCode', async (req, res) => {
     try {
         let event = await addStaffToEvent(req.body.fireID, req.params.eventCode);
         res.status(200).send(event);

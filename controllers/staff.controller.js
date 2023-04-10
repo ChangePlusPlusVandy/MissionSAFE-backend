@@ -49,10 +49,8 @@ const createEvent = async (options) => {
         code,
         date: new Date(),
         programs: options.programs,
-        staff: [options.fireID],
     });
-
-    await newEvent.save();
+    await newEvent.save()
     return newEvent;
 }
 
