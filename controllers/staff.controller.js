@@ -46,10 +46,12 @@ const updateStaff = async (fireID, update) => {
 const createEvent = async (options) => {
     const code = await generateValidCode();
     const newEvent = new Event({
-        code,
+        code: code,
         date: new Date(),
         programs: options.programs,
         staff: [options.fireID],
+        name: options.name,
+        description: options.description
     });
 
     await newEvent.save();
