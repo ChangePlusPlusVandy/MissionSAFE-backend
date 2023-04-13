@@ -1,10 +1,10 @@
-// const { MongoClient, ObjectID } = require("mongodb");
-// require("dotenv").config();
-// const url = process.env.DB;
-// const client = new MongoClient(url, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// });
+const { MongoClient, ObjectID } = require("mongodb");
+require("dotenv").config();
+const url = process.env.DB;
+const client = new MongoClient(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
 
 const youth = [
@@ -95,24 +95,17 @@ const events = [
 ];
 
 
-
-  
-
 let id= 0
 function getID(){
     id +=1;
     return id-1;
 }
 function addObjectID(seedData){
-    // for (let i = 0; i < seedData.length(); ++i){
-    //     seedData[i]._id = new ObjectID();
-    // }
-    // return seedData;
-    for (let i = 0; i < seedData.length; ++i){
-        seedData[i]._id = getID();
+    for (let i = 0; i < seedData.length(); ++i){
+        seedData[i]._id = new ObjectID();
     }
-    
     return seedData;
+
 }
 let formSeed = addObjectID(forms);
 let eventSeed = addObjectID(events);
