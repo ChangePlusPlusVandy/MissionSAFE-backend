@@ -23,6 +23,8 @@ const addFormToEvent = async (eventCode, options) => {
     if(!event) throw new Error("Event not found");
 
     const newNote = new Form({
+        name: options.name,
+        description: options.description,
         date: new Date(),
         content: options.content,
         programs: options.programs,
