@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let Event = new Schema({
+    name: {type: String, required: true},
+    description: {type: String, required: true},
     code: { type: String, required: true},
     date: { type: Date, required: true}, 
     programs: { type: [String], required: true},
