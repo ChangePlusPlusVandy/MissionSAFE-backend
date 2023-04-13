@@ -43,15 +43,19 @@ const youth = [
     }
   ];
 
-  const forms = [  
-    {   
-        date: new Date("2022-02-01T08:00:00"),    
-      content: "Volunteer sign-up sheet",    
+const forms = [
+    {
+      name: "Volunteer Sign-Up Sheet",
+      description: "Form for volunteers to sign up for upcoming community service events.",
+      date: new Date("2022-02-01T08:00:00"),
+      content: "Volunteer sign-up sheet",
       programs: ["Community Service"],
-        associated_youth_id: [],
-        associated_event_id: []
+      associated_youth_id: [],
+      associated_event_id: []
     },
     {
+      name: "Field Trip Permission Slip",
+      description: "Form for parents/guardians to provide consent for their child to participate in a STEM Club field trip.",
       date: new Date("2022-03-15T10:30:00"),
       content: "Permission slip for field trip",
       programs: ["STEM Club"],
@@ -59,24 +63,31 @@ const youth = [
       associated_event_id: []
     },
     {
+      name: "Medical Treatment Consent Form",
+      description: "Form for parents/guardians to provide consent for their child to receive medical treatment during a sports team event.",
       date: new Date("2022-04-02T14:00:00"),
       content: "Consent form for medical treatment",
       programs: ["Sports Team"],
       associated_youth_id: [],
       associated_event_id: []
     }
-];
+  ];
+  
 
-const events = [  
-	{    
-	code: "ABC123",    
-	date: new Date("2022-03-15T10:30:00"),    
-	programs: ["STEM Club"],
-      staff: ["staff_123", "staff_456"],
-      attended_youth: [],
-      attached_forms: []
+  const events = [
+  {
+    name: "STEM Club Meeting",
+    description: "Monthly meeting of the STEM Club where members learn about and discuss topics related to science, technology, engineering, and mathematics.",
+    code: "ABC123",
+    date: new Date("2022-03-15T10:30:00"),
+    programs: ["STEM Club"],
+    staff: ["staff_123", "staff_456"],
+    attended_youth: [],
+    attached_forms: []
   },
   {
+    name: "Garden Service Project",
+    description: "Volunteer opportunity to help clean up a local park and plant new flowers.",
     code: "DEF456",
     date: new Date("2022-05-10T16:30:00"),
     programs: ["Community Service"],
@@ -85,6 +96,8 @@ const events = [
     attached_forms: []
   },
   {
+    name: "Food Service Project",
+    description: "Volunteer opportunity to help sort and distribute food at a local food bank.",
     code: "GHI789",
     date: new Date("2022-07-01T12:00:00"),
     programs: ["Community Service"],
@@ -93,6 +106,7 @@ const events = [
     attached_forms: []
   }
 ];
+
 
 
 
