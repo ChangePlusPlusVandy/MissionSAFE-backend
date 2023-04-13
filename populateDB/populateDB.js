@@ -95,11 +95,7 @@ const events = [
 ];
 
 
-let id= 0
-function getID(){
-    id +=1;
-    return id-1;
-}
+
 function addObjectID(seedData){
     for (let i = 0; i < seedData.length(); ++i){
         seedData[i]._id = new ObjectID();
