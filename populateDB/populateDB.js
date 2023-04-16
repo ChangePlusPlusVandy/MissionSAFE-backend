@@ -6,7 +6,6 @@ const client = new MongoClient(url, {
     useUnifiedTopology: true,
 });
 
-
 const youth = [
     {
       firstName: "Alice",
@@ -41,7 +40,7 @@ const youth = [
       attached_forms: [],
       attended_events: []
     }
-  ];
+];
 
 const forms = [
     {
@@ -50,8 +49,8 @@ const forms = [
       date: new Date("2022-02-01T08:00:00"),
       content: "Volunteer sign-up sheet",
       programs: ["Community Service"],
-      associated_youth_id: [],
-      associated_event_id: []
+      associated_youth_id: "",
+      associated_event_id: ""
     },
     {
       name: "Field Trip Permission Slip",
@@ -59,8 +58,8 @@ const forms = [
       date: new Date("2022-03-15T10:30:00"),
       content: "Permission slip for field trip",
       programs: ["STEM Club"],
-      associated_youth_id: [],
-      associated_event_id: []
+      associated_youth_id: "",
+      associated_event_id: ""
     },
     {
       name: "Medical Treatment Consent Form",
@@ -68,8 +67,8 @@ const forms = [
       date: new Date("2022-04-02T14:00:00"),
       content: "Consent form for medical treatment",
       programs: ["Sports Team"],
-      associated_youth_id: [],
-      associated_event_id: []
+      associated_youth_id: "",
+      associated_event_id: ""
     }
   ];
   
@@ -107,48 +106,46 @@ const forms = [
   }
 ];
 
-
-
-
 function addObjectID(seedData){
-    for (let i = 0; i < seedData.length(); ++i){
+    for (let i = 0; i < seedData.length; ++i){
         seedData[i]._id = new ObjectID();
     }
     return seedData;
-
 }
+
 let formSeed = addObjectID(forms);
 let eventSeed = addObjectID(events);
 let youthSeed = addObjectID(youth);
 
+function connectModels(){
+  //Assign one to each
+  for (let i = 0; i <eventSeed.length; ++i){
 
-//Assign one to each
-for (let i = 0; i <eventSeed.length; ++i){
-
-    //Tie forms to events
-    formSeed[i].associated_event_id.push(eventSeed[i]._id);
-    eventSeed[i].attached_forms.push(formSeed[i]._id);
-   
-
-    //Tie events to youth
-    eventSeed[i].attended_youth.push(youthSeed[i]._id);
-    youthSeed[i].attended_events.push(eventSeed[i]._id);
+      //Tie forms to events
+      formSeed[i].associated_event_id = eventSeed[i]._id;
+      eventSeed[i].attached_forms.push(formSeed[i]._id);
     
 
-    //Tie forms to youth
-    formSeed[formSeed.length-i-1].associated_youth_id.push(youthSeed[i]._id);
-    youthSeed[youthSeed.length-i-1].attached_forms.push(formSeed[i]._id);
+      //Tie events to youth
+      eventSeed[i].attended_youth.push(youthSeed[i]._id);
+      youthSeed[i].attended_events.push(eventSeed[i]._id);
+      
+
+      //Tie forms to youth
+      formSeed[formSeed.length-i-1].associated_youth_id = (youthSeed[i]._id);
+      youthSeed[youthSeed.length-i-1].attached_forms.push(formSeed[i]._id);
+  }
+
+  //Add an extra link for events and youth relationship
+  eventSeed[1].attended_youth.push(youthSeed[2]._id);
+  youthSeed[2].attended_events.push(eventSeed[1]._id);
+  eventSeed[1].attended_youth.push(youthSeed[3]._id);
+  youthSeed[3].attended_events.push(eventSeed[1]._id);
 }
 
-//Add an extra link for each relationship
-formSeed[0].associated_youth_id.push(youthSeed[1]._id);
-youthSeed[1].attached_forms.push(formSeed[0]._id);
+connectModels();
 
-eventSeed[1].attended_youth.push(youthSeed[2]._id);
-youthSeed[2].attended_events.push(eventSeed[1]._id);
 
-formSeed[0].associated_event_id.push(eventSeed[2]._id);
-eventSeed[2].attached_forms.push(formSeed[0]._id);
 
 
 const addEntries = async (col_name, entries) => {
@@ -160,8 +157,9 @@ const addEntries = async (col_name, entries) => {
     console.log(`Inserted ${insertedCount} new entries`);
 };
 
-
-await client.connect();
-await addEntries("Youth", youthSeed);
-await addEntries("Events",eventSeed);
-await addEntries("Forms",formSeed);
+(async () => {
+  await client.connect();
+  await addEntries("Youth", youthSeed);
+  await addEntries("Events",eventSeed);
+  await addEntries("Forms",formSeed);
+})();
