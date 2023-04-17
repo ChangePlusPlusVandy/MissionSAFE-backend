@@ -27,7 +27,6 @@ app.use("/api", router);
 app.listen(PORT, () => {
     mongoose.set('strictQuery', false);
     mongoose.connect(process.env.MONGODB, () => {
-        console.log("db url: ", process.env.MONGODB);
         console.log(`Server starting @ PORT ${PORT}`);
     });
 });
