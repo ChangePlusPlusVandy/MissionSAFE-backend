@@ -1,28 +1,24 @@
-const admin = require('firebase-admin');
-const { applicationDefault } = require('firebase-admin/app');
+// Imports the Firebase auth 
+// Splits the authorization header ("Bearer <token>") 
+// into an array and takes the second element, which is the token
 
-admin.initializeApp({
-    credential: applicationDefault(), // is this correct?
-    databaseURL: "https://missionsafe-b864f.firebaseio.com" // is this correct?
-});
+const auth = require("../config/firebase-config");
 
-const authRequired = async (req, res, next) => {
-    const authHeader = req.headers.authorization || '';
-    const match = authHeader.match(/Bearer (.+)/);
-    if (!match) {
-        return res.status(401).send(); // not sure what error msg to send here
-    }
+const AuthRequired = async (req, res, next) => {
 
     try {
-        const accessToken = match[1];
-        if(!accessToken) {
-            return res.status(401, "Not Authorized").send();
+        const token = req.headers.authorization.split(" ")[1];
+
+        // Verifies the token and decodes it to get associated user data
+        // and stores it in req.user to be accessed by other routes
+        const decodeValue = await auth.verifyIdToken(token);
+        if (decodeValue) {
+            req.user = decodeValue;
+            return next();
         }
-        req.jwt = await admin.auth().verifyIdToken(accessToken);
-        next();
-    } catch (err) {
-        return res.status(401, "Not Authorized").send(err.message);
+    } catch (e) {
+        return res.status(401).json({ message: "Unauthorized/invalid credentials" });
     }
 };
 
-module.exports = { authRequired };
+module.exports = AuthRequired;
