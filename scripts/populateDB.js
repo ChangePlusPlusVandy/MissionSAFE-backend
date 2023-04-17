@@ -1,6 +1,8 @@
-const { MongoClient, ObjectID } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
-const url = process.env.DB;
+
+const url = process.env.MONGODB;
+
 const client = new MongoClient(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -108,7 +110,7 @@ const forms = [
 
 function addObjectID(seedData){
     for (let i = 0; i < seedData.length; ++i){
-        seedData[i]._id = new ObjectID();
+        seedData[i]._id = new ObjectId();
     }
     return seedData;
 }
@@ -128,7 +130,7 @@ function connectModels(){
 
       //Tie events to youth
       eventSeed[i].attended_youth.push(youthSeed[i]._id);
-      youthSeed[i].attended_events.push(eventSeed[i]._id);
+      youthSeed[i].attended_events.push(eventSeed[i].code);
       
 
       //Tie forms to youth
@@ -138,18 +140,15 @@ function connectModels(){
 
   //Add an extra link for events and youth relationship
   eventSeed[1].attended_youth.push(youthSeed[2]._id);
-  youthSeed[2].attended_events.push(eventSeed[1]._id);
-  eventSeed[1].attended_youth.push(youthSeed[3]._id);
-  youthSeed[3].attended_events.push(eventSeed[1]._id);
+  youthSeed[2].attended_events.push(eventSeed[1].code);
+  eventSeed[1].attended_youth.push(youthSeed[0]._id);
+  youthSeed[0].attended_events.push(eventSeed[1].code);
 }
 
 connectModels();
 
-
-
-
 const addEntries = async (col_name, entries) => {
-    const col = client.db("test").collection(col_name);
+    const col = client.db("seed").collection(col_name);
     console.log("Connected to DB");
 
     console.log(`Adding entries to the DB...`);
@@ -159,7 +158,12 @@ const addEntries = async (col_name, entries) => {
 
 (async () => {
   await client.connect();
-  await addEntries("Youth", youthSeed);
-  await addEntries("Events",eventSeed);
-  await addEntries("Forms",formSeed);
+  await client.db("seed").collection("youths").deleteMany({});
+  await client.db("seed").collection("events").deleteMany({});
+  await client.db("seed").collection("forms").deleteMany({});
+
+  await addEntries("youths", youthSeed);
+  await addEntries("events",eventSeed);
+  await addEntries("forms",formSeed);
+  await client.close();
 })();

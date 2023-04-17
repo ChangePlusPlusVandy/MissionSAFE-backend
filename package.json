@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "npm test",
-    "start": "node app.js"
+    "start": "node app.js",
+    "populate": "node scripts/populateDB.js"
   },
   "repository": {
     "type": "git",
