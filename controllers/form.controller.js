@@ -36,7 +36,24 @@ const addFormToEvent = async (eventCode, options) => {
     await event.save();
 }
 
+const getFormByID = async (id) => {
+    const form = await Form.findById(id);
+
+    if(!form) throw new Error("Form not found");
+    return {
+        _id: form._id,
+        name: form.name,
+        description: form.description,
+        date: form.date,
+        content: form.content,
+        programs: form.programs,
+        associated_youth: await Youth.findById(form.associated_youth_id),
+        associated_event: await Event.findById(form.associated_event_id)
+    }
+}
+
 module.exports = {
     addFormToYouth,
     addFormToEvent,
+    getFormByID
 }
