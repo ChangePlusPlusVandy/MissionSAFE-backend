@@ -58,6 +58,7 @@ const getFormsForYouth = async (fireID) => {
 
 const getEventsForYouth = async (fireID) => {
 	const youth = await Youth.findOne({ fireID });
+
 	if (!youth) throw new Error("Youth not found");
 
 	let events = youth.attended_events.map(async (eventCode) => {
