@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "npm test",
+    "populate": "node scripts/populateDB.js",
     "start": "nodemon app.js"
   },
   "repository": {
