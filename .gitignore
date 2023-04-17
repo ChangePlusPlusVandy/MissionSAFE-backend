@@ -1,3 +1,6 @@
+# ignore the serviceAccountKey.json file with our service account crednetials 
+config/serviceAccountKey.json
+
 # Logs
 logs
 *.log

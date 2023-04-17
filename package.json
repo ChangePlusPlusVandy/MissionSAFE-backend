@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "npm test",
+    "populate": "node scripts/populateDB.js",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -20,6 +21,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "firebase-admin": "^11.6.0",
     "mongoose": "^6.8.0",
     "nodemon": "^2.0.22"
   }
